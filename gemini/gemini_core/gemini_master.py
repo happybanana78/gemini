@@ -169,8 +169,8 @@ class Gemini:
             results_history.write(str_fmt.format(*r) + '\n')
 
         # STRATEGY
-        percent_change = helpers.percent_change(self.data['equity'][0],
-                                                self.data['equity'][-1])
+        percent_change = helpers.percent_change(self.data['equity'].iloc[0],
+                                                self.data['equity'].iloc[-1])
         open_fee = sum([t.fee for t in self.account.opened_trades])
         close_fee = sum([t.fee for t in self.account.closed_trades])
 
@@ -180,7 +180,7 @@ class Gemini:
         returns = self.data['equity'].pct_change()
         strategy = [
             ("Capital", self.account.initial_capital, ""),
-            ("Final Equity", self.data['equity'][-1], ""),
+            ("Final Equity", self.data['equity'].iloc[-1], ""),
             ("Net profit",
              helpers.profit(self.account.initial_capital, percent_change),
              " ({:+.2f}%)".format(percent_change * 100)),
@@ -287,8 +287,8 @@ class Gemini:
             results_history.write(str_fmt.format(*r) + '\n')
 
         # STRATEGY
-        percent_change = helpers.percent_change(self.data['equity'][0],
-                                                self.data['equity'][-1])
+        percent_change = helpers.percent_change(self.data['equity'].iloc[0],
+                                                self.data['equity'].iloc[-1])
         open_fee = sum([t.fee for t in self.account.opened_trades])
         close_fee = sum([t.fee for t in self.account.closed_trades])
 
@@ -298,7 +298,7 @@ class Gemini:
         returns = self.data['equity'].pct_change()
         strategy = [
             ("Capital", self.account.initial_capital, ""),
-            ("Final Equity", self.data['equity'][-1], ""),
+            ("Final Equity", self.data['equity'].iloc[-1], ""),
             ("Net profit",
              helpers.profit(self.account.initial_capital, percent_change),
              " ({:+.2f}%)".format(percent_change * 100)),
