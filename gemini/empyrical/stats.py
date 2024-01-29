@@ -1369,7 +1369,7 @@ def beta_aligned(returns, factor_returns, risk_free=0.0, out=None):
         returns = returns.to_numpy()[:, np.newaxis]
 
     if factor_returns.ndim == 1:
-        factor_returns = factor_returns[:, np.newaxis]
+        factor_returns = factor_returns.to_numpy()[:, np.newaxis]
 
     N, M = returns.shape
 
