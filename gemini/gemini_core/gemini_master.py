@@ -139,6 +139,9 @@ class Gemini:
         begin_price = self.data.iloc[0]['open']
         final_price = self.data.iloc[-1]['close']
 
+        print(self.account.initial_capital)
+        print(self.data.iloc[0]['close'])
+
         shares = self.account.initial_capital / self.data.iloc[0]['close']
         self.data['base_equity'] = [price * shares for price in
                                     self.data['close']]
