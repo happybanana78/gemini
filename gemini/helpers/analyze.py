@@ -22,7 +22,7 @@ def analyze_bokeh(algo, title=None, show_trades=False):
     # TODO Replace to Gemini class
 
     bokeh.plotting.output_file("results.html")
-    p = bokeh.plotting.figure(x_axis_type="datetime", withs=1000)
+    p = bokeh.plotting.figure(x_axis_type="datetime", width=1000)
     p.grid.grid_line_alpha = 0.3
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'Equity'
