@@ -24,7 +24,7 @@ def get_past(pair, period, days_history=30):
     end = int(time.time())
     start = end - (24 * 60 * 60 * days_history)
 
-    url = 'https://api.poloniex.com/markets/{0}/candles?startTime={1}&endTime={2}&interval={3}}'
+    url = 'https://api.poloniex.com/markets/{0}/candles?startTime={1}&endTime={2}&interval={3}'
     url = url.format(pair, start, end, period)
     response = requests.get(url)
     return response.json()
