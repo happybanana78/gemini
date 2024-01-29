@@ -24,16 +24,10 @@ def get_past(pair, period, days_history=30):
     end = int(time.time())
     start = end - (24 * 60 * 60 * days_history)
 
-    url = 'https://api.poloniex.com/markets/{0}/candles?startTime={1}&endTime={2}&interval={3}'
-    url = url.format(pair, start, end, period)
+    url = 'https://api.poloniex.com/markets/{0}/candles?startTime={1}&interval={2}'
+    url = url.format(pair, start, period)
     response = requests.get(url)
     return response.json()
-
-
-def convert_pair_poloniex(pair):
-    converted = "{1}_{0}".format(*pair.split('_'))
-    logger.warning('Warning: Pair was converted to ' + converted)
-    return converted
 
 
 def load_dataframe(pair, period, days_history=30):
@@ -45,12 +39,12 @@ def load_dataframe(pair, period, days_history=30):
     :param timeframe: H - hour, D - day, W - week, M - month
     :return:
     """
-    data = get_past(convert_pair_poloniex(pair), period, days_history)
+    data = get_past(pair, period, days_history)
     if 'error' in data:
         raise Exception("Bad response: {}".format(data['error']))
 
     df = pd.DataFrame(data)
-    df['date'] = pd.to_datetime(df['date'], unit='s')
-    df = df.set_index(['date'])
+    df[9] = pd.to_datetime(df[9], unit='ms')
+    df = df.set_index([9])
 
     return df
