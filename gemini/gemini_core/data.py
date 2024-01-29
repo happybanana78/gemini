@@ -63,7 +63,7 @@ def px_available_pairs(show=False):
     :return: A list of trading pairs
     :rtype: list
     """
-    url = "https://poloniex.com/public?command=returnTicker"
+    url = "https://api.poloniex.com/markets"
     response = requests.get(url)
     data = response.json()
     tickers = [i for i in data]
@@ -98,7 +98,7 @@ def px_request_data(pair, tf, start, end):
     start = (start-dt.datetime(1970,1,1)).total_seconds()
 
     # Grab the close tf possible given the dates
-    url = "https://poloniex.com/public?command=returnChartData&currencyPair={0}&start={1}&end={2}&resolution=auto&period={3}"
+    url = "https://api.poloniex.com/markets/{0}/candles?startTime={1}&endTime={2}&interval={3}"
     url = url.format(pair, start, end, tf)
     response = requests.get(url)
     df = pd.DataFrame(response.json())
