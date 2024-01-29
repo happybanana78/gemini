@@ -20,22 +20,13 @@ def get_now(pair):
 def get_past(pair, period, days_history=30):
     """
     Return historical charts data from poloniex.com
-    :param pair:
-    :param period:
-    :param days_history:
-    :return:
     """
     end = int(time.time())
     start = end - (24 * 60 * 60 * days_history)
-    params = {
-        'command': 'returnChartData',
-        'currencyPair': pair,
-        'start': start,
-        'end': end,
-        'period': period
-    }
 
-    response = requests.get('https://poloniex.com/public', params=params)
+    url = 'https://api.poloniex.com/markets/{0}/candles?startTime={1}&endTime={2}&interval={3}}'
+    url = url.format(pair, start, end, period)
+    response = requests.get(url)
     return response.json()
 
 
